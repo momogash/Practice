@@ -1,41 +1,49 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mystrstr.c                                         :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: momogash <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/24 12:30:17 by momogash          #+#    #+#             */
-/*   Updated: 2019/06/25 09:34:53 by momogash         ###   ########.fr       */
+/*   Created: 2019/07/19 16:15:57 by momogash          #+#    #+#             */
+/*   Updated: 2019/07/19 17:36:18 by momogash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "libft.h"
-#include <stdio.h>
+#include <unistd.h>
 
-char	*mystrstr(const char *haystack, const char *needle)
+void	ft_putchar(char c)
 {
-	while (*haystack)
-	{
-
-		char *str = (char *)haystack;
-		char *sub = (char *)needle;
-		while	(*haystack && *sub && *haystack == *sub)
-		{
-			haystack++;
-			sub++;
-		}
-		if (!*sub)
-			return (str);
-		haystack = str + 1;
-	}
-	return (NULL);
+	write(1, &c, 1);
 }
 
-int		main(void)
+void	ft_putnbr(int nbr)
 {
-	char *s = "have a great day today";
-	puts(mystrstr(s, "arld"));
-	return (0);
+		if	(nbr < 0)
+		{
+			ft_putchar('-');
+			ft_putnbr(-1*nbr);
+		}
+		else if	(nbr > 9)
+		{
+			if (nbr / 10)
+				ft_putnbr(nbr / 10);
+			ft_putchar(48 + (nbr % 10));
+		}
+		else
+			ft_putchar(nbr + 48);
+}
+
+int main(void)
+{
+	int n;
+
+	n = 1;
+	while	(n <= 100)
+	{
+		ft_putnbr(n);
+		ft_putchar('\n');
+		n++;
+	}
+	return(0);
 }
